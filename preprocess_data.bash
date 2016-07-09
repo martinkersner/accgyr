@@ -20,9 +20,8 @@ TYPE="$2" # acc OR gyr
 ACCELEROMETER="acc"
 GYROSCOPE="gyr" # TODO
 
-if [ "$TYPE" == "$ACCELEROMETER" ]; then
-  echo "ID, X, Y, Z"
-fi
+# header
+echo "ID, X, Y, Z"
 
 NUM_LINE=0
 while read -r LINE; do
@@ -31,6 +30,8 @@ while read -r LINE; do
   if [ "$NUM_LINE" -gt "$SKIP" ]; then
     if [ "$TYPE" == "$ACCELEROMETER" ]; then
       echo $LINE | cut -d',' -f1,3-5
+    elif [ "$TYPE" == "$GYROSCOPE" ]; then
+      echo $LINE | cut -d',' -f1,7-9 # TODO fill empty lines
     fi
   fi
 done < "$INPUT"
