@@ -28,6 +28,8 @@ After *rolling mean* was applied we can see that there are no big changes betwee
 ### Visualization of movements
 Red, green and blue colors in plots correspond to acceleration in X, Y and Z axis.
 
+Plots were created with [exploreData.R](https://github.com/martinkersner/accgyr/blob/master/exploreData.R).
+
 #### Sit on a chair and stand up
 
 <img src="http://i.imgur.com/DWxI8fV.png?1" />
@@ -51,7 +53,7 @@ In table you can see that the same movements have smaller values (smaller number
 
 Setting a threshold at the right place will be also challenging, however with enough data decision should be easier.
 
-Values displayed in this table were computer using [compare1DSignals.R](https://github.com/martinkersner/accgyr/blob/master/compare1DSignals.R).
+Values displayed in this table were computed using [compare1DSignals.R](https://github.com/martinkersner/accgyr/blob/master/compare1DSignals.R).
 
 <table style="border-collapse:collapse;border-spacing:0"><tr><th style="font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal"></th><th style="font-family:Arial, sans-serif;font-size:14px;font-weight:bold;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal">sitandup1</th><th style="font-family:Arial,
 sans-serif;font-size:14px;font-weight:bold;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal">sitandup2</th><th style="font-family:Arial, sans-serif;font-size:14px;font-weight:bold;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal">stairsup1</th><th style="font-family:Arial, sans-serif;font-size:14px;font-weight:bold;padding:10px

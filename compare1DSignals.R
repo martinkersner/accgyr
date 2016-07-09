@@ -1,7 +1,10 @@
+# Martin Kersner, m.kersner@gmail.com
+# 07/10/2016
+
 library(dtw);
 
-sitandup1    <- 'prep_data/acc_sitandup1.csv'
-sitandup2    <- 'prep_data/acc_sitandup2.csv'
+sitandup1     <- 'prep_data/acc_sitandup1.csv'
+sitandup2     <- 'prep_data/acc_sitandup2.csv'
 stairsup1     <- 'prep_data/acc_stairsup1.csv'
 stairsup2     <- 'prep_data/acc_stairsup2.csv'
 stairsdown1   <- 'prep_data/acc_stairsdown1.csv'

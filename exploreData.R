@@ -1,9 +1,12 @@
+# Martin Kersner, m.kersner@gmail.com
+# 07/09/2016
+
 #csv_file <- 'prep_data/acc_forward1.csv'
 #csv_file <- 'prep_data/acc_forward2.csv'
-#csv_file <- 'prep_data/acc_sitandup1.csv'
+csv_file <- 'prep_data/acc_sitandup1.csv'
 #csv_file <- 'prep_data/acc_sitandup2.csv'
 #csv_file <- 'prep_data/acc_stairsdown1.csv'
-csv_file <- 'prep_data/acc_stairsdown2.csv'
+#csv_file <- 'prep_data/acc_stairsdown2.csv'
 #csv_file <- 'prep_data/acc_chairforward1.csv'
 #csv_file <- 'prep_data/acc_chairforward2.csv'
 
