@@ -92,7 +92,16 @@ However, it means we have to compute DTW more often.
 It all boils down to how precise we want to be, eg. do we have to able detect even just one step on stairs?
 [compare1DSignals_part2.R](https://github.com/martinkersner/accgyr/blob/master/compare1DSignals_part2.R) enables to experiment with short time signal templates in 1D (Z-axis).
 The main focus was put on determining whether person is going up or down on stairs. 
-Currently we are not able to distinguish between them using short time 1D signal template.
+~Currently we are not able to distinguish between them using short time 1D signal template.~
 Adding one more dimension (Y-axis) could help because it captures speed of forward movement (it should differ in our observations).
 
 <img src="http://i.imgur.com/JD6HMCD.png?1" />
+
+After examining data more thoroughly it turned out that we could be able to distinguish between movements only using 1D short time signal template.
+However, additional dimension would be still beneficial for increasing classification confidence.
+In following plot you can see comparison statistics of *stairs up 1* movement with others.
+Again, the lower values mean higher similarity.
+Two green lines denote the worst false positive and false negative medians.
+The space between them contains almost one fifth (the more the better) on scale of all comparisons with *stairs up 1* movement.
+
+<img src="http://i.imgur.com/gIh5ZTb.png?1" />
