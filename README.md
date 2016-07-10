@@ -26,7 +26,7 @@ After *rolling mean* was applied we can see that there are no big changes betwee
 <img src="http://i.imgur.com/WpR7sED.png?1" />
 
 ### Visualization of movements
-Red, green and blue colors in plots correspond to acceleration in X, Y and Z axis.
+Red, green and blue colors in plots correspond to acceleration in X, Y and Z-axis.
 
 Plots were created with [exploreData.R](https://github.com/martinkersner/accgyr/blob/master/exploreData.R).
 
@@ -84,3 +84,15 @@ sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;o
 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal"></td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal"></td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal"></td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px
 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal"></td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal"></td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal"></td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px
 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal"></td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal"></td></tr></table>
+
+### Classify movements in 1D with short time signals
+The longer template signal we would use, the longer it would take to compute DTW.
+Simple solution could be to create short-time templates.
+However, it means we have to compute DTW more often.
+It all boils down to how precise we want to be, eg. do we have to able detect even just one step on stairs?
+[compare1DSignals_part2.R](https://github.com/martinkersner/accgyr/blob/master/compare1DSignals_part2.R) enables to experiment with short time signal templates in 1D (Z-axis).
+The main focus was put on determining whether person is going up or down on stairs. 
+Currently we are not able to distinguish between them using short time 1D signal template.
+Adding one more dimension (Y-axis) could help because it captures speed of forward movement (it should differ in our observations).
+
+<img src="http://i.imgur.com/JD6HMCD.png?1" />
