@@ -122,3 +122,19 @@ Slope of red line in plot denotes average speed (walking down was faster).
 If we would decide to use this computation of an average speed we would have to also incorporate sliding window to reduce error which accumulates along with time.
 
 <img src="http://i.imgur.com/xqZ5N7z.png?1" />
+
+### Generating templates from recorded data
+New data (10 for each case) were captured while walking stairs up and down.
+This data should be used for generating templates and then employed with dynamic time warping.
+Each template should look like a single wave, describing one step on stairs.
+Each signal was divided to equidistant non-overlapping parts for which we then computed crosscorrelation with one manually selected wave.
+After that we shifted signal in order to achieve the maximum correlation.
+All (if they achieved at least minimum determined correlation) shifted signals were then averaged to create final template.
+For wave expressing walking up we were able to obtain template that quite nicely summarize all signal waves, however we are not sure if this generalization is not too big.
+In case of walking stairs down we came accros problem that is related to quite different dynamics between steps, therefore the way how we generate template now is not good enough.
+Allowing overlap between parts of signal could help to obtain better results.
+
+On the following graph you can see signal wave from walking stairs up. The higher plot expresses base signal which was used to compute correlation with all other waves.
+The plot below is generated template.
+
+<img src="http://i.imgur.com/jRABee3.png?1" />
