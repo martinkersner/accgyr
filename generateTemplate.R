@@ -94,7 +94,7 @@ plot(base)
 
 for (i in seq(10)) {
   tmp_whole <- Z[i, ]
-  len <- length(tmp)
+  len <- length(tmp_whole)
   for (j in seq(1, (len-(len%%base_step)), base_step)) {
     tmp_part <- tmp_whole[j:(j+base_step)]
     
@@ -106,6 +106,6 @@ for (i in seq(10)) {
 }
 
 noncol_values <- which(base_df != 0, arr.ind = T)
-agg_count_cols <- as.data.frame(table(used_col_values[,2]))
+agg_count_cols <- as.data.frame(table(noncol_values[,2]))
 template <- colSums(base_df)/agg_count_cols[,2]
 plot(template)
