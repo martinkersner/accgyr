@@ -4,15 +4,16 @@
 library(dtw);
 
 up <- read.table("up.csv", header = TRUE)
-down <- read.table("down_reduce.csv", header = TRUE)
-#down <- down[-c(8, 10),]
+down <- read.table("down.csv", header = TRUE)
+down[is.na(down)] <- 0
 
-# UP
-base_start <- 25 # 25 for UP
-base_step <- 50 # 50 for UP
-up_base <- up[2,base_start:(base_start+base_step)] # them main base on which we will try to fit all others
+# UP base template, shouldn't be changed
+base_start <- 30 # 30 for UP
+base_step <- 110 # 110 for UP
+up_base <- up[2, base_start:(base_start+base_step)] # them main base on which we will try to fit all others
 
-data <- up
+# can be changed; expresses dataset that will be used for testing
+data <- down
 data_base <- up_base
 
 # normalize
@@ -23,14 +24,25 @@ base_norm <- data_base/max_data
 data <- data_norm
 template <- base_norm
 
-#for (i in seq(nrow(data))) {
-for (i in 3) {
-  comparisons <- c()
+i <- 1 # index of testing signal 
+distances <- c()
   
-  for (j in seq((ncol(data)-base_step))) {
-    #print(data[i, j:(j+base_step)])
-    alignment <- dtw(data[i, j:(j+base_step)], template, keep=TRUE)
-    comparisons <- append(comparisons, alignment$distance)
-  }
+for (j in seq((ncol(data)-base_step))) {
+  alignment <- dtw(data[i, j:(j+base_step)], template, window.type='sakoechiba', window.size=80, keep=TRUE)
+  distances <- append(distances, alignment$distance)
 }
-plot(comparisons)
+
+dev.off()
+par(mfrow=c(2,1))
+ylim <- c(0, 1)
+plot(seq(base_norm), base_norm)
+plot(distances, ylim=ylim)
+
+threshold <- 0.75 # decision threshold
+abline(h=threshold, col='green')
+
+if (max(distances) > threshold) {
+  mtext("UP")
+} else {
+  mtext("DOWN")
+}
