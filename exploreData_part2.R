@@ -1,6 +1,7 @@
 # Martin Kersner, m.kersner@gmail.com
 # 07/10/2016
 
+# load data
 sitandup1     <- 'prep_data/acc_sitandup1.csv'
 sitandup2     <- 'prep_data/acc_sitandup2.csv'
 stairsup1     <- 'prep_data/acc_stairsup1.csv'
@@ -11,9 +12,9 @@ chairforward1 <- 'prep_data/acc_chairforward1.csv'
 chairforward2 <- 'prep_data/acc_chairforward2.csv'
 
 # PARAMETERS
-window <- 50 # data contains about 50 measurements per second
-# make graphs look better and normalize it
-#ylim   <- c(-0.1, 2.1)
+window <- 50 # window size used for denoising data 
+
+# make graphs with normalized ranges
 ylim   <- c(-0.1, 600)
 xlim   <- c(0, 400) 
 
@@ -23,7 +24,7 @@ cornerText <- function(text, location="topright") {
 
 plotY <- function(csv_file, window, ylim, xlim, title) {
   data <- read.csv(csv_file)
-  Y <- rollmean(data$Y, k=window)
+  Y <- rollmean(data$Y, k=window) # denoise data
   ID <- data$ID
   crop_length <- window/2
   ID <- ID[crop_length:(length(ID)-crop_length)]
@@ -42,6 +43,7 @@ plotY <- function(csv_file, window, ylim, xlim, title) {
   #abline(h=median(Y), col="green")
 }
 
+# plot data
 dev.off()
 par(mfrow=c(2,2), oma=c(2, 0, 2, 0))
 plotY(stairsup1, window, ylim, xlim, "up1")

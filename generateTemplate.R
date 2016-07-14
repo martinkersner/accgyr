@@ -3,7 +3,7 @@
 
 library("zoo")
 
-# from stackoverflow
+# Compute the highest cross-correlation and lag for given two signals.
 crossCorrMax<- function(a,b) {
   d <- ccf(a, b, plot = FALSE)
   cor = d$acf[,,1]
@@ -13,7 +13,7 @@ crossCorrMax<- function(a,b) {
   return(res_max)
 }
 
-# from stackoverflow
+# Shift signal.
 shift <- function(x, n, invert=FALSE, default=NA){
   stopifnot(length(x)>=n)
   if(n==0){
@@ -34,6 +34,7 @@ shift <- function(x, n, invert=FALSE, default=NA){
   }
 }
 
+# load data
 # UP
 data1  <- read.csv('prep_data/acc_up1.csv')
 data2  <- read.csv('prep_data/acc_up2.csv')
@@ -60,9 +61,11 @@ data10 <- read.csv('prep_data/acc_up10.csv')
 
 window <- 50 # data contains about 50 measurements per second
 
+# crop the beginning and the end of signal
 start <- 100
 end   <- 400
 
+# denoise data
 Z1  <- rollmean(data1$Z, k=window)[start:end]
 Z2  <- rollmean(data2$Z, k=window)[start:end]
 Z3  <- rollmean(data3$Z, k=window)[start:end]
@@ -74,6 +77,7 @@ Z8  <- rollmean(data8$Z, k=window)[start:end]
 Z9  <- rollmean(data9$Z, k=window)[start:end]
 Z10 <- rollmean(data10$Z, k=window)[start:end]
 
+# create dataframe
 Z <- rbind(Z1, Z2)
 Z <- rbind(Z, Z3)
 Z <- rbind(Z, Z4)
@@ -88,10 +92,11 @@ Z <- rbind(Z, Z10)
 base_start <- 25 # 25 for UP
 base_step <- 50 # 50 for UP
 threshold <- 0.7 # cross correlation threshold for accepting
-base <- Z2[base_start:(base_start+base_step)] # them main base on which we will try to fit all others
+base <- Z2[base_start:(base_start+base_step)] # the main base on which we will try to fit all others
 base_df <- base
 plot(base)
 
+# comparing all signals with predefined base template 
 for (i in seq(10)) {
   tmp_whole <- Z[i, ]
   len <- length(tmp_whole)
@@ -105,6 +110,7 @@ for (i in seq(10)) {
   }
 }
 
+# combining signals in order to obtain generalized template
 noncol_values <- which(base_df != 0, arr.ind = T)
 agg_count_cols <- as.data.frame(table(noncol_values[,2]))
 template <- colSums(base_df)/agg_count_cols[,2]

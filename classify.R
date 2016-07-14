@@ -5,18 +5,18 @@ library(dtw);
 
 up <- read.table("up.csv", header = TRUE)
 down <- read.table("down.csv", header = TRUE)
-down[is.na(down)] <- 0
+down[is.na(down)] <- 0 # fix problem with couple of NA values in loaded dataframe
 
 # UP base template, shouldn't be changed
 base_start <- 30 # 30 for UP
 base_step <- 110 # 110 for UP
-up_base <- up[2, base_start:(base_start+base_step)] # them main base on which we will try to fit all others
+up_base <- up[2, base_start:(base_start+base_step)] # the main base on which we will try to fit all other signals
 
 # can be changed; expresses dataset that will be used for testing
 data <- down
 data_base <- up_base
 
-# normalize
+# normalize data
 max_data <- max(data)
 data_norm <- data/max_data
 base_norm <- data_base/max_data
@@ -32,12 +32,15 @@ for (j in seq((ncol(data)-base_step))) {
   distances <- append(distances, alignment$distance)
 }
 
+# plotting result
 dev.off()
 par(mfrow=c(2,1))
 ylim <- c(0, 1)
 plot(seq(base_norm), base_norm)
 plot(distances, ylim=ylim)
 
+
+# classification
 threshold <- 0.75 # decision threshold
 abline(h=threshold, col='green')
 

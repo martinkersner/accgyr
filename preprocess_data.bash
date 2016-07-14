@@ -18,7 +18,7 @@ INPUT="$1"
 TYPE="$2" # acc OR gyr
 
 ACCELEROMETER="acc"
-GYROSCOPE="gyr" # TODO
+GYROSCOPE="gyr"
 
 # header
 echo "ID, X, Y, Z"
